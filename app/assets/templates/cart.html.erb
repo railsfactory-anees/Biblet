@@ -1,0 +1,47 @@
+<div class="container text-center">
+
+			<div class="col-md-5 col-sm-12">
+				<div class="bigcart"></div>
+				<h1>Your shopping cart</h1>
+				<!-- <p>
+					This is a free and <b><a href="http://tutorialzine.com/2014/04/responsive-shopping-cart-layout-twitter-bootstrap-3/" title="Read the article!">responsive shopping cart layout, made by Tutorialzine</a></b>. It looks nice on both desktop and mobile browsers. Try it by resizing your window (or opening it on your smartphone and pc).
+				</p> -->
+			</div>
+			
+			<div class="col-md-7 col-sm-12 text-left">
+				<ul>
+					<li class="row list-inline columnCaptions">
+						<span>QTY</span>
+						<span>ITEM</span>
+						<span>Price</span>
+					</li>
+					<div ng-repeat="cart_item in carts"> 
+					
+					<li class="row cart-row"  ng-repeat="(key,val) in cart_item">
+						<span class="quantity">{{val.quantity}}</span>
+						<span class="itemName">{{val.productName}}-{{val.unitPrice | currency:'&#8377;' }}</span>
+						<span class="popbtn"><a class="arrow"></a></span>
+						<span class="cartprice" ng-init="total=10" >{{val.totalPrice | currency:'&#8377;' }}</span>
+					</li>
+					
+					</div>
+					<li class="row cart-row totals">
+						<span class="itemName">Total:</span>
+						<span class="cartprice">{{getTotal() | currency:'&#8377;'}}</span>
+						<span class="order"> <a class="text-center">ORDER</a></span>
+					</li>
+					
+					
+					
+				</ul>
+			</div>
+
+		</div>
+
+		<!-- The popover content -->
+
+		<div id="popover" style="display: none">
+			<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+			<a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+		</div>
+		

@@ -1,0 +1,88 @@
+
+<div class=" container-fluid">
+  <div class="widget">
+    <div class="clearfix"></div>
+    <div class="widget-content nopadding">
+      <div id="grid"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+ 
+    $(document).ready(function () {
+        var crudServiceBaseUrl = "/products",
+            dataSource = new kendo.data.DataSource({
+
+                transport: {
+                    read:  {
+                        url: crudServiceBaseUrl,
+                        dataType: "json"
+                    },
+                      create: {
+                        url: crudServiceBaseUrl,
+                        dataType: "json",
+                        contentType: "application/json",
+                        type: "POST"
+                    },
+                    update: {
+                        url: function(product) {
+                            return crudServiceBaseUrl + "/" + product.id;
+                        },
+                        dataType: "json",
+                        contentType: "application/json",
+                        type: "PUT"
+                    },
+                    destroy: {
+                        url: function(product) {
+                            return crudServiceBaseUrl + "/" + product.id
+                        },
+                        dataType: "json",
+                        contentType: "application/json",
+                        type: "DELETE"
+                    },
+                        parameterMap: function(product, type) {
+                        if (type === "update" || type === "create") {
+                            return JSON.stringify({ product: product });
+                        }
+                    }
+ 
+                },
+                pageSize: 15,
+                serverFiltering: false,
+                serverSorting: false,
+                schema: {
+                    data:'products',
+                    model: {
+                        id: "id",
+                        fields: {
+                            id:{},
+                            name: { editable: true },
+                            price: { type: "number" }
+                         }
+                    }
+                }
+            });
+        $("#grid").kendoGrid({
+            dataSource: dataSource,
+            height: 400,
+            sortable: true,
+            reorderable: true,
+            resizable: true,
+            pageable: true,
+            batch: true,
+            filterable: true,
+            toolbar: ["create", "save","cancel"],
+            columns: [
+                { title: "No",field: "id", width: "150px" },
+                { title: "name",field: "name", width: "150px" },
+                { title: "Prize",field: "price",  width: "150px" },
+                               { command: ["destroy"], title: "", width: "70px" },
+                {command: ["edit"], title: "", width: "70px" }
+                ],
+            editable: "inline"
+        });
+   
+    });
+
+</script>

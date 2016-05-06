@@ -1,0 +1,54 @@
+<!-- this page for table view -->
+<div class="container">
+  <div class="col-xs-2 "></div>
+  <div class="table-responsive col-xs-8  Table well" id="tableContent" >
+    <div class="Title">
+      <span>Book Details</span>
+    </div>
+    <div class="Heading" style="background-color: graytext;">
+      <div class="Cell">
+        <span>No</span>
+      </div>
+      <div class="Cell">
+        <a href ng-click="orderByField='name'; reverseSort = !reverseSort">NAME
+          <span ng-show="orderByField == 'name'"><span ng-show="!reverseSort">^</span>
+          <span ng-show="reverseSort">v</span></span>
+        </a>
+
+      </div>
+      <div class="Cell">
+        <a href ng-click="orderByField='price'; reverseSort = !reverseSort">PRICE
+          <span ng-show="orderByField == 'price'"><span ng-show="!reverseSort">^</span>
+          <span ng-show="reverseSort">v</span></span>
+        </a>
+      </div>
+      <div class="Cell">
+        <p>EDIT</p>
+      </div>
+    </div> 
+    <div ng-repeat="product in products|orderBy:orderByField:reverseSort" class="Heading" >
+      <div class="Cell">
+        {{$index+1}}
+
+      </div>
+      <div class="Cell">
+        <input ng-readonly="product.showInput"  ng-model="product.name">
+        
+      </div>
+      <div class="Cell">
+        <input ng-readonly="product.showInput"  ng-model="product.price">
+      </div>
+      <div class="Cell">
+        
+        <button class="editBtn btn btn-primary" ng-click="rowEdit(product)">Update</button>
+        <button class="deleteBtn btn btn-danger" ng-click="rowDelete(product)">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-2"></div>  
+</div>
+
+
+
+
+

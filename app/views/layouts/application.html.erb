@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AngularRails2</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+   <%= stylesheet_link_tag   "/stylesheets/kendo.common.min.css",media: "all","data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag   "/stylesheets/kendo.metro.min.css",media: "all","data-turbolinks-track" => true %>
+<%= stylesheet_link_tag   "/stylesheets/kendo.default.min.css",media: "all","data-turbolinks-track" => true %>
+<%= javascript_include_tag "/javascripts/jquery.min.js", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "/javascripts/kendo.web.min.js", "data-turbolinks-track" => true %>
+</head>
+<body ng-app="AngularRails">
+<%= render :partial=> "layouts/header"%>
+<%if notice%>
+ <p class="notice alert alert-success pull-center"><%= notice %></p>
+ <%end%>
+ <%if alert%>
+ <p class="alert alert-success"><%= alert %></p>
+ <%end%>
+
+
+<%= yield %>
+
+</body>
+</html>

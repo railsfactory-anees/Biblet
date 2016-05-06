@@ -1,0 +1,44 @@
+<nav class=" navbar navbar-inverse header-nav">
+  <div class="container-fluid">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="#head">
+      <span>
+     <!--  <img alt="logo" src="images/icon.jpg" height="20px" width="30px;" class="img-rounded"> -->
+     <%=image_tag("logo.png", alt: "Example Image" , :class => "img-rounded logo")%>
+      
+      </span></a>
+
+ 
+    </div>
+
+    <% if current_user %>
+    <ul class="nav navbar-nav">
+      
+      <li><i class="fa fa-home"></i><a href="#home">Home</a></li>
+      <li><i class="fa fa-home"></i><a href="#gallery">Gallery</a></li>
+      <li><i class="fa fa-shield"></i><a href="#addBook">Add Book</a></li>
+     
+      <%if current_user.try(:admin?)%>
+     
+      <li><i class="fa fa-comment"></i><a href="#tableView">Manage</a></li>
+       <%end%>
+     
+     
+    </ul>
+    <div class="logout_btn pull-right">
+       <%#= link_to('Logout', destroy_user_session_path, :method => :get) %>
+     
+      <!--  <a href="#carts"><img src="/assets/images/cartlogo.png" class="minicart"></a></li> -->
+       <%= link_to image_tag("logout.png", alt: "logout", :class => "logout-btn"),destroy_user_session_path%>
+
+    </div>
+    <div class=" pull-right">
+      <%=link_to image_tag("cartlogo.png", alt: "my Cart" , :class => "minicart"),"/#carts"%>
+    </div>
+
+    <%end%>
+    </div>
+     
+  </nav>
+
+<!-- :class=>"fa fa-lock fa-1x font20"  -->
