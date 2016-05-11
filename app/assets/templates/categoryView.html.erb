@@ -1,0 +1,72 @@
+ <div class="container-fluid">
+      <div class="row">
+
+
+        <div id="categoryDiv">
+          <div ng-repeat="cat in category" class="col-md-2">
+            <a class="thumbnail"  ng-click="showByCategory(cat.name)"> 
+              <img
+              ng-src="{{cat.cover}}" class="img-responsive cat_img" /> <span
+              class="caption">{{cat.name}}</span>
+            </a>
+
+
+          </div>
+          <div class="col-md-2">
+            <a class="thumbnail" data-toggle="modal" data-target="#LoginModal" id="addCatLink">
+              <img ng-src="images/plus.jpg" /><span class="caption">Add
+              Category</span>
+            </a>
+
+
+          </div>
+
+
+        </div>
+        <!-- // //This is the code for the add category popup // -->
+        <div class="modal fade" id="LoginModal" role="dialog" >
+          <form name="addCategory" novalidate role="form" 
+          ng-submit="addCategory.$valid && addNewCategory(category)" >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times; </span><span class="sr-only">
+                  Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">New Category</h4>
+              </div>
+              <div class="modal-body">
+                <div class="alert alert-success" id="catAlert" >
+                  <strong>Success!</strong> Category added Successfully
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon">@</span> <input name="catName" type="text"
+                  ng-model="newCategory.name" class="form-control" placeholder="Category Name" />
+                </div>
+                <p></p>
+              <!-- <div class="input-group">
+                <span class="input-group-addon">@</span> <input name="catImage" type="file"
+                  ng-model="catImage" class="form-control" placeholder="image" />
+                </div> -->
+                <p></p>
+                <button type="submit"  class="btn btn-primary">Add</button>
+                <button type="reset" class="btn btn-danger" id="catCancel">Cancel</button>
+                
+                <!-- <button type="button" class="btn-primary">SignUp</button> -->
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+      
+
+    </div>
+  </div>
+  

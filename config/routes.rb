@@ -40,10 +40,10 @@ Rails.application.routes.draw do
       root 'application#index', as: :authenticated_root
     end
     unauthenticated do
-      root 'devise/sessions#new', as: :unauthenticated_root
+      root 'application#index', as: :unauthenticated_root
     end
   end
-  root 'devise/sessions#new'
+  root 'application#index'
 
   #root 'application#index'
   # get '*path' => 'application#index'

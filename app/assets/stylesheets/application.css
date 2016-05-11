@@ -13,13 +13,12 @@
  *= require_tree .
  *= require_self
  */
-body {
+ body {
   background: #DDD;
   font-family: Verdana;
   font-size: 13px;
   line-height: 18px;
 }
-
 #body, #side_body {
   float: left;
   width: 45%;
@@ -27,7 +26,6 @@ body {
   color: #333;
   padding: 20px;
 }
-
 #menu ul {
   list-style: none;
   padding: 0px;
@@ -45,7 +43,6 @@ body {
   }
 }
 .minicart{
-  
   background-position: -500px 50px;
   background-repeat:no-repeat;
   width: 40px;
@@ -53,9 +50,30 @@ body {
   padding-right: 10px;
 }
 .logout-btn{
-
   width: 30px;
   height: 30px;
   padding-right: 10px;
+}
+.header-search-box{
+  width: 100%;
+  margin: 36px 0px 9px 0px !important;
+  height: 34px;
+  border-radius: 20px;
+}
+.header-log-div{
 
+  margin: 22px 8px 5px 136px !important;
+  border-radius: 16px;
+  border: 2px solid #F1B62A;
+  padding: 11px 0px 0 0px !important;
+  width: 270px;
+  height: 59px;
+  
+
+}
+.header-log-div label{
+  color: white;
+}
+input{
+    text-align: center;
 }

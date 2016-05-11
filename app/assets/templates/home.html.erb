@@ -1,195 +1,109 @@
+<div class="col-md-4 pull-center ">
+  <input type="text" class="header-search-box" ng-model="search1" placeholder="Find your book here">
+</div> 
 
 <div class="alert alert-success container" id="success-alert" ng-show="flash.getMessage()">
-
   <b>{{flash.getMessage()}}</b>
 </div>
-<div class="container-fluid">
-  <div class="row">
 
-    <div class="searchTab">
-      <span class=" glyphicon glyphicon-search"> <input type="text"
-        ng-model="search1" placeholder="Find your book here">
-      </span>
-    </div>
-    <div id="categoryDiv">
-      <div ng-repeat="cat in category" class="col-md-2">
-        <a class="thumbnail"  ng-click="showByCategory(cat.name)"> 
-          <img
-          ng-src="{{cat.cover}}" class="img-responsive cat_img" /> <span
-          class="caption">{{cat.name}}</span>
-        </a>
+<ng-include src="'categoryView.html'"></ng-include>
 
-
-      </div>
-    <!--   <div class="col-md-2">
-        <a class="thumbnail" data-toggle="modal" data-target="#LoginModal" id="addCatLink">
-          <img ng-src="images/plus.jpg" /><span class="caption">Add
-          Category</span>
-        </a>
-
-
-      </div> -->
-
-
-    </div>
-    <!-- // //This is the code for the add category popup // -->
-    <div class="modal fade" id="LoginModal" role="dialog" >
-    <form name="addCategory" novalidate role="form" 
-    ng-submit="addCategory.$valid && addNewCategory(category)" >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">&times; </span><span class="sr-only">
-            Close</span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">New Category</h4>
-        </div>
-        <div class="modal-body">
-          <div class="alert alert-success" id="catAlert" >
-            <strong>Success!</strong> Category added Successfully
-          </div>
-          <div class="input-group">
-            <span class="input-group-addon">@</span> <input name="catName" type="text"
-            ng-model="newCategory.name" class="form-control" placeholder="Category Name" />
-          </div>
-          <p></p>
-              <!-- <div class="input-group">
-                <span class="input-group-addon">@</span> <input name="catImage" type="file"
-                  ng-model="catImage" class="form-control" placeholder="image" />
-                </div> -->
-                <p></p>
-                <button type="submit"  class="btn btn-primary">Add</button>
-                <button type="reset" class="btn btn-danger" id="catCancel">Cancel</button>
-                
-                <!-- <button type="button" class="btn-primary">SignUp</button> -->
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                data-dismiss="modal">Close</button>
-              </div>
-
-            </div>
-          </div>
-        </form>
-      </div>
-      
-
-    </div>
+<div class="container-fluid" id="galleryDiv">
+  <div class="alert alert-success" ng-hide="selectedLang==null">
+    ({{products.length}} ) Books Under <strong>{{selectedLang | uppercase}} </strong>Category<br>
   </div>
-
-
-
-
-  <div class="container-fluid" id="galleryDiv">
-    <div class="alert alert-success" ng-hide="selectedLang==null">
-      ({{products.length}} ) Books Under <strong>{{selectedLang | uppercase}} </strong>Category<br>
-      
-    </div>
-    <div class="alert alert-danger" ng-Show="products.length==0">
-      <p ><strong>Sorry!</strong>there is no books under this category</p>
-    </div>
-
-    <div ng-repeat="product in products |filter:search1" class="col-md-3">
-
-
-      <div class="thumbnail gal_li">
-        <img ng-src="{{product.avatar}}" alt="{{product.cover}}">
-        <p class="title">{{ product.name }}</p>
-        <p class="price">{{ product.price | currency }}</p>
-        <p class="date">{{ product.pubdate | date }}</p>
-        <div class="rating">
-          <p class="likes" ng-click="plusOne($index)">{{product.likes}}+</p>
-          <p class="dislikes" ng-click="minusOne($index)">{{product.dislikes}}-</p>
-        </div>
-        <div class="hover_effect">
-          <div>
-             <a class="thumbnail" ng-click="addToCart(product)" class="tooltip" title="Some tooltip text!"> 
+  <div class="alert alert-danger" ng-Show="products.length==0">
+    <p ><strong>Sorry!</strong>there is no books under this category</p>
+  </div>
+  <div ng-repeat="product in products |filter:search1" class="col-md-3">
+    <div class="thumbnail gal_li">
+      <img ng-src="{{product.avatar}}" alt="{{product.cover}}">
+      <p class="title">{{ product.name }}</p>
+      <p class="price">{{ product.price | currency }}</p>
+      <p class="date">{{ product.pubdate | date }}</p>
+      <div class="rating">
+        <p class="likes" ng-click="plusOne($index)">{{product.likes}}+</p>
+        <p class="dislikes" ng-click="minusOne($index)">{{product.dislikes}}-</p>
+      </div>
+      <div class="hover_effect">
+        <div>
+         <a class="thumbnail" ng-click="addToCart(product)" class="tooltip" title="Some tooltip text!"> 
           <span
           class="caption">ADD TO CART</span>
         </a>
-       
+      </div>
+      <p class="title_hover text-center">{{ product.name }}</p>
+      <div class="section">
+        <section ng-init="tab=1">
+          <ul class="nav nav-tabs">
+            <li ng-class="{active:tab===1}"><a href ng-click="tab=1">Reviews</a></li>
+            <li ng-class="{active:tab===2}"><a href ng-click="tab=2">Description</a></li>
 
-          </div>
-
-          <p class="title_hover text-center">{{ product.name }}</p>
-          <div class="section">
-            <section ng-init="tab=1">
-              <ul class="nav nav-tabs">
-                <li ng-class="{active:tab===1}"><a href ng-click="tab=1">Reviews</a></li>
-                <li ng-class="{active:tab===2}"><a href ng-click="tab=2">Description</a></li>
-
-              </ul>
-            </section>
-          </div>
-          <div class="panel" ng-show="tab===1">
-            <section ng-init="sub=1">
-              <ul class="nav nav-tabs" id="spcl-tab">
-
-                <li><a href ng-click="sub=1" ng-class="{active:sub===1}">Add
-                  a review</a></li>
-                  <li><a href ng-click="sub=2" ng-class="{active:sub===2}">Read
-                    Reviews</a></li>
-                  </ul>
-                </section>
-                <div ng-show="sub===1">
-                  <div class="row" id="spcl-row">
-                    <form class="form" role="form" name="reviewForm"
-                    ng-submit="reviewForm.$valid &&addReview(product)" novalidate>
-                    <pre>
-                      <br>Stars :{{review.star}}</b> <br> {{review.comments}}-<br><cite>by:{{
-                      review.name }}</cite>
-                    </pre>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input placeholder="select a rate " name="stars"
-                        ng-model="review.star" type="number" required
-                        class="form-control ng-dirty ng-invalid" min="0" />
-                      </div>
-                    </div>
-
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input name="name" ng-model="review.name" type="email" required
-                        class="form-control ng-dirty ng-invalid"
-                        placeholder="Enter your Email id" />
-                      </div>
-                    </div>
-
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <input name="comment" ng-model="review.comments" type="textarea"
-                        placeholder="Enter your comments " required
-                        class="form-control ng-dirty ng-invalid" />
-                      </div>
-                    </div>
-                    <div class="col-md-6 pull-center">
-                      <div class="form-group">
-                        <input class="form-control" type="submit" value="submit">
-                      </div>
-                    </div>
-
-                  </form>
-                </div>
+          </ul>
+        </section>
+      </div>
+      <div class="panel" ng-show="tab===1">
+        <section ng-init="sub=1">
+          <ul class="nav nav-tabs" id="spcl-tab">
+            <li><a href ng-click="sub=1" ng-class="{active:sub===1}">Add a review</a></li>
+            <li><a href ng-click="sub=2" ng-class="{active:sub===2}">Read Reviews</a></li>
+          </ul>
+        </section>
+        <div ng-show="sub===1">
+          <div class="row" id="spcl-row">
+            <form class="form" role="form" name="reviewForm"
+            ng-submit="reviewForm.$valid &&addReview(product)" novalidate>
+            <pre>
+              <br>Stars :{{review.star}}</b> <br> {{review.comments}}-<br><cite>by:{{
+              review.name }}</cite>
+            </pre>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input placeholder="select a rate " name="stars"
+                ng-model="review.star" type="number" required
+                class="form-control ng-dirty ng-invalid" min="0" />
               </div>
-              <div class="parentRev">
-              <div class="reviews" ng-repeat="rev in product.reviews">
-                <div class="review" ng-show="sub===2">
-
-                  <p>
-                    <b>Stars :{{rev.star}}</b><br> {{ rev.comments }}- <cite>by:{{
-                    rev.name }}</cite>
-                  </p>
-                </div>
-              </div>
-              <div>
             </div>
 
-            <div class="panel" ng-show="tab===2">
-              <p>{{product.description}}</p>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input name="name" ng-model="review.name" type="email" required
+                class="form-control ng-dirty ng-invalid"
+                placeholder="Enter your Email id" />
+              </div>
             </div>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <input name="comment" ng-model="review.comments" type="textarea"
+                placeholder="Enter your comments " required
+                class="form-control ng-dirty ng-invalid" />
+              </div>
+            </div>
+            <div class="col-md-6 pull-center">
+              <div class="form-group">
+                <input class="form-control" type="submit" value="submit">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="parentRev">
+        <div class="reviews" ng-repeat="rev in product.reviews">
+          <div class="review" ng-show="sub===2">
+            <p>
+              <b>Stars :{{rev.star}}</b><br> {{ rev.comments }}- <cite>by:{{
+              rev.name }}</cite>
+            </p>
           </div>
+        </div>
+        <div>
+        </div>
+        <div class="panel" ng-show="tab===2">
+          <p>{{product.description}}</p>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
